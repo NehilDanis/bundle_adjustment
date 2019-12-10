@@ -67,10 +67,12 @@ class Reader:
             # 9 shows the parameters per camera.
 
 
-            points_in_3d = np.empty(num_3d_points)
-            for i in range(num_3d_points):
+            points_in_3d = np.empty(num_3d_points * 3)
+            for i in range(num_3d_points * 3):
                 points_in_3d[i] = float(bz_file.readline())
+        
+            points_in_3d = points_in_3d.reshape((num_3d_points, 3))
 
-        return camera_indices, point_indices, camera_params, points_in_3d
+        return camera_indices, point_indices, camera_params, projections_2d, points_in_3d
 
 
